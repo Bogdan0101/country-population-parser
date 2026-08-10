@@ -12,10 +12,10 @@ async def main():
         print("------------------------------")
         print(f'Region: {row["region"]}')
         print(f'Total population: {row["total_population"]}')
-        print(f'T: {row["max_country"]}')
-        print(f'P: {row["max_population"]}')
-        print(f'A: {row["min_country"]}')
-        print(f'C: {row["min_population"]}')
+        print(f'Top country: {row["max_country"]}')
+        print(f'Top country population: {row["max_population"]}')
+        print(f'Small country: {row["min_country"]}')
+        print(f'Small country population: {row["min_population"]}')
         print("------------------------------")
 
 
