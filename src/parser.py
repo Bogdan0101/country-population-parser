@@ -13,9 +13,7 @@ class BaseParser(ABC):
         pass
 
     async def scrap(self) -> list[dict]:
-        async with httpx.AsyncClient(
-                follow_redirects=True, timeout=20.0
-        ) as client:
+        async with httpx.AsyncClient(follow_redirects=True, timeout=20.0) as client:
             response = await client.get(self.url, headers=self.headers)
             print(response)
             return self.parse(html=response.text)
@@ -25,9 +23,11 @@ class WikipediaParser(BaseParser):
     def __init__(self):
         super().__init__(
             url="https://en.wikipedia.org/w/index.php"
-                "?title=List_of_countries_by_population_(United_Nations)"
-                "&oldid=1215058959",
-            headers={"User-Agent": "CountryPopulationParser/1.0 (kononovb71@gmail.com)"}
+            "?title=List_of_countries_by_population_(United_Nations)"
+            "&oldid=1215058959",
+            headers={
+                "User-Agent": "CountryPopulationParser/1.0 (kononovb71@gmail.com)"
+            },
         )
 
     def parse(self, html: str) -> list[dict]:
@@ -57,11 +57,13 @@ class WikipediaParser(BaseParser):
                 continue
             region = region_tag["title"]
 
-            data.append({
-                "location": location,
-                "population": int(population),
-                "region": region,
-            })
+            data.append(
+                {
+                    "location": location,
+                    "population": int(population),
+                    "region": region,
+                }
+            )
 
         return data
 
